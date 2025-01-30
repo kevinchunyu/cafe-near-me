@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/app
+    environment:
+      - NODE_ENV=production
+      - API_KEY=${API_KEY}
+    restart: always
+
+  frontend:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app
+    depends_on:
+      - backend
+    restart: always

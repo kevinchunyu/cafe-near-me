@@ -34,11 +34,11 @@ function App() {
       const response = await fetch(`http://localhost:3000/flights?airline_icao=${airline}`);
       const data = await response.json();
       if (response.ok) {
-        if (!data.apiResponse || !Array.isArray(data.apiResponse.data)) {
+        if (!data.data || !Array.isArray(data.data)) {
             return alert("No valid flight data found.");
         }
 
-        const filteredFlights = data.apiResponse.data.filter(flight => flight.codeshared == null);
+        const filteredFlights = data.data.filter(flight => flight.codeshared == null);
         setFlights(filteredFlights || []);
         addFlightRoutes(filteredFlights || []);
       } else {
